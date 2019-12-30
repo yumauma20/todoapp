@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index()
-    {
-        $folders = Folder::all();
+    public function index(int $id)
+{
+    $folders = Folder::all();
 
-        return view('tasks/index',[
-            'folders' => $folders,
-        ]);
-    }
+    return view('tasks/index', [
+        'folders' => $folders,
+        'current_folder_id' => $id,
+    ]);
+}
 }
