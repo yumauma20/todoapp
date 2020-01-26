@@ -63,6 +63,8 @@ class TaskController extends Controller
         ]);
     }
 
+
+    
     public function edit(int $id, int $task_id, EditTask $request)
     {
         //1
@@ -73,6 +75,22 @@ class TaskController extends Controller
         $task->status = $request->status;
         $task->due_date = $request->due_date;
         $task->save();
+
+        //3
+        return redirect()->route('tasks.index', [
+            'id' => $task->folder_id,
+        ]);
+    }
+
+
+
+    public function delete(int $id, int $task_id)
+    {
+        //1
+        $task = Task::find($task_id);
+
+        //2
+        $task->delete();
 
         //3
         return redirect()->route('tasks.index', [
