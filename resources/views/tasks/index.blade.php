@@ -39,7 +39,8 @@
               <th>タイトル</th>
               <th>状態</th>
               <th>期限</th>
-              <th></th>
+              <th>編集</th>
+              <th>削除</th>
             </tr>
             </thead>
             <tbody>
