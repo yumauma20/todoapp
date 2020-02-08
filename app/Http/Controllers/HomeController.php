@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\EditUser;
 
 class HomeController extends Controller
 {
@@ -25,4 +26,35 @@ class HomeController extends Controller
             'id' => $folder->id,
         ]);
     }
+
+    //ユーザーページの表示
+    public function showUserForm()
+    {
+        return view('showuser');
+    }
+
+    //ユーザー名編集ページの表示
+    public function nameEditForm()
+    {
+        return view('nameedit');
+    }
+
+    public function nameedit(EditUser $request)
+    {
+        $user = Auth::user();
+
+        $user->name = $request->name;
+        $user->save();
+
+        $folder = $user->folders()->first();
+
+        if (is_null($folder)){
+            return view('home');
+        }
+
+        return redirect()->route('tasks.index',[
+            'id' => $folder->id,
+        ]);
+    }
+
 }
