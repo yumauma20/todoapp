@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\EditUser;
 
 class HomeController extends Controller
 {
@@ -38,7 +39,7 @@ class HomeController extends Controller
         return view('nameedit');
     }
 
-    public function nameedit(Request $request)
+    public function nameedit(EditUser $request)
     {
         $user = Auth::user();
 
@@ -46,6 +47,10 @@ class HomeController extends Controller
         $user->save();
 
         $folder = $user->folders()->first();
+
+        if (is_null($folder)){
+            return view('home');
+        }
 
         return redirect()->route('tasks.index',[
             'id' => $folder->id,

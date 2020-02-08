@@ -7,13 +7,6 @@
         <nav class="panel panel-default">
           <div class="panel-heading">ユーザーページ</div>
           <div class="panel-body">
-            @if($errors->any())
-              <div class="alert alert-danger">
-                @foreach($errors->all() as $message)
-                  <p>{{ $message }}</p>
-                @endforeach
-              </div>
-            @endif
               <div class="user-name">
                 <label for="username">ユーザー名</label>
                 <p>{{ Auth::user()->name }}</p>
