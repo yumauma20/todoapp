@@ -22,6 +22,7 @@
                 <label for="email">メールアドレス</label>
                 <p>{{ Auth::user()->email }}</p>
               </div>
+              <a href="{{ route('username.edit') }}">ユーザー名を編集する</a>
           </div>
         </nav>
       </div>

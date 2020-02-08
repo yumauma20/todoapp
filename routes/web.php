@@ -15,6 +15,9 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/user', 'HomeController@showUserForm')->name('show.user');
 
+    Route::get('/user/edit', 'HomeController@nameEditForm')->name('username.edit');
+    Route::post('/user/edit', 'HomeController@nameedit');
+    
     Route::get('/folders/{id}/tasks', 'TaskController@index')->name('tasks.index');
 
     Route::get('/folders/create', 'FolderController@showCreateForm')->name('folders.create');

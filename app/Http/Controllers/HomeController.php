@@ -26,8 +26,30 @@ class HomeController extends Controller
         ]);
     }
 
+    //ユーザーページの表示
     public function showUserForm()
     {
         return view('showuser');
     }
+
+    //ユーザー名編集ページの表示
+    public function nameEditForm()
+    {
+        return view('nameedit');
+    }
+
+    public function nameedit(Request $request)
+    {
+        $user = Auth::user();
+
+        $user->name = $request->name;
+        $user->save();
+
+        $folder = $user->folders()->first();
+
+        return redirect()->route('tasks.index',[
+            'id' => $folder->id,
+        ]);
+    }
+
 }
