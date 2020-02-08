@@ -15,6 +15,7 @@
             <div class="my-navbar-control">
                 @if(Auth::check())
                     <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
+                    <a class="my-navbar-item" href="{{ route('show.user') }}">ユーザーページ</a>
                     <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

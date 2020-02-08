@@ -25,4 +25,9 @@ class HomeController extends Controller
             'id' => $folder->id,
         ]);
     }
+
+    public function showUserForm()
+    {
+        return view('showuser');
+    }
 }
