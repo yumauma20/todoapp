@@ -11,17 +11,32 @@
               フォルダを追加する
             </a>
           </div>
-          <div class="list-group">
-            @foreach($folders as $folder)
-              <a
+          <table class="table">
+            <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>編集</th>
+              <th>削除</th>
+            </tr>
+            </thead>
+            <tbody>
+              @foreach($folders as $folder)
+              <tr>
+                <td>
+                  <a
                   href="{{ route('tasks.index', ['id' => $folder->id]) }}"
                   class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}"
-              >
-                {{ $folder->title }}
-              </a>
-              <a href="{{ route('folders.edit', ['id' => $folder->id]) }}">編集</a>
+                  >
+                  {{ $folder->title }}
+                  </a>
+                </td>
+                <td>
+                  <a href="{{ route('folders.edit', ['id' => $folder->id]) }}">編集</a>
+                </td>
+              </tr>
             @endforeach
-          </div>
+            </tbody>
+          </table>
         </nav>
       </div>
       <div class="column col-md-8">
