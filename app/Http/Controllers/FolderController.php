@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Folder;
+use App\Http\Requests\EditFolder;
 use App\Http\Requests\CreateFolder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,4 +30,42 @@ class FolderController extends Controller
             'id' => $folder->id,
         ]);
     }
+
+    public function showEditForm(int $id)
+    {
+        $folder = Folder::find($id);
+
+        return view('folders/edit',[
+            'folder' => $folder,
+        ]);
+    }
+
+    public function edit(int $id, EditFolder $request)
+    {
+        //1
+        $folder = Folder::find($id);
+
+        //2
+        $folder->title = $request->title;
+        $folder->save();
+
+        //3
+        return redirect()->route('tasks.index', [
+            'id' => $folder->id,
+        ]);
+    }
+
+    // public function delete(int $id)
+    // {
+    //     //1
+    //     $folder = Folder::find($id);
+
+    //     //2
+    //     $folder->delete();
+
+    //     //3
+    //     return redirect()->route('tasks.index', [
+    //         'id' => $folder_id,
+    //     ]);
+    // }
 }

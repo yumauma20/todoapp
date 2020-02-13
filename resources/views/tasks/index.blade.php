@@ -19,6 +19,7 @@
               >
                 {{ $folder->title }}
               </a>
+              <a href="{{ route('folders.edit', ['id' => $folder->id]) }}">編集</a>
             @endforeach
           </div>
         </nav>
