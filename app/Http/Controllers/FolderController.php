@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Folder;
+use App\Task;
 use App\Http\Requests\EditFolder;
 use App\Http\Requests\CreateFolder;
 use Illuminate\Http\Request;
@@ -55,17 +56,22 @@ class FolderController extends Controller
         ]);
     }
 
-    // public function delete(int $id)
-    // {
-    //     //1
-    //     $folder = Folder::find($id);
+    public function delete(int $id)
+    {
+        $folder = Folder::find($id);
+        $tasks = Task::where('folder_id', $folder->id)->get();
 
-    //     //2
-    //     $folder->delete();
+        $tasks->each->delete();
+        $folder->delete();
+        
+        $firstfolder = Auth::user()->folders()->first();
 
-    //     //3
-    //     return redirect()->route('tasks.index', [
-    //         'id' => $folder_id,
-    //     ]);
-    // }
+        if(is_null($firstfolder)){
+            return view('home');
+        }
+
+        return redirect()->route('tasks.index', [
+            'id' => $firstfolder->id,
+        ]);
+    }
 }
