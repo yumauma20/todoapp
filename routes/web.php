@@ -23,6 +23,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/folders/{id}/edit', 'FolderController@showEditForm')->name('folders.edit');
     Route::post('/folders/{id}/edit', 'FolderController@edit');
 
+    Route::get('/folders/{id}/delete', 'FolderController@delete')->name('folders.delete');
+    Route::post('/folders/{id}/delete', 'FolderController@delete');
+
     Route::get('/folders/create', 'FolderController@showCreateForm')->name('folders.create');
     Route::post('/folders/create', 'FolderController@create');
 
